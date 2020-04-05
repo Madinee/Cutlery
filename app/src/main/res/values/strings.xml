@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Cutlery</string>
+    <string name="cutlery_logo">Cutlery logo</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up?</string>
+
+    <string name="registration">Registration</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
 </resources>
