@@ -14,7 +14,7 @@
         <TextView
             android:text="@string/registration"
             android:textStyle="bold"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -173,6 +173,7 @@
         android:layout_height="wrap_content"/>
 
     <Button
+        android:id="@+id/button_register"
         android:layout_margin="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -197,6 +198,7 @@
             tools:ignore="HardcodedText" />
 
         <TextView
+            android:id="@+id/sign_in"
             android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
