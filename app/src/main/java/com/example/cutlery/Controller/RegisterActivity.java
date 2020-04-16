@@ -1,5 +1,6 @@
 package com.example.cutlery.Controller;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,46 +12,43 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.example.cutlery.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText email, password, username, confirmPassword;
+    private EditText useremail, userpassword, username;
     private Button button_register;
+
     private TextView sign_in;
     private ProgressBar loading;
-    private static String URL_REGIST="https://127.0.0.1/cultery/register.php";
+    private FirebaseAuth firebaseAuth;
+    String name, email, password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        email=findViewById(R.id.email);
-        password=findViewById(R.id.password);
-        username=findViewById(R.id.username);
-        button_register=findViewById(R.id.button_register);
-        loading=findViewById(R.id.loading);
-        sign_in=findViewById(R.id.sign_in);
-        confirmPassword=findViewById(R.id.confirmPassword);
+        useremail = findViewById(R.id.email);
+        userpassword = findViewById(R.id.password);
+        username = findViewById(R.id.username);
+        button_register = findViewById(R.id.button_register);
+        loading = findViewById(R.id.loading);
+        sign_in = findViewById(R.id.sign_in);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
 
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+
             }
         });
 
@@ -58,60 +56,48 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Regist();
+                if (Register()) {
+                    //Upload data to the database
+                    String user_email = useremail.getText().toString().trim();
+                    String user_password = userpassword.getText().toString().trim();
+
+                    firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if (task.isSuccessful()) {
+                                //sendEmailVerification();
+                                Toast.makeText(RegisterActivity.this, "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
+                                finish();
+                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+
+                            } else {
+
+                                Toast.makeText(getApplicationContext(), "registration failed", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+                    });
+                }
             }
         });
     }
-    private  void Regist(){
-        loading.setVisibility(View.VISIBLE);
-        button_register.setVisibility(View.GONE);
+        private Boolean Register(){
+            Boolean result = false;
+            loading.setVisibility(View.VISIBLE);
+            button_register.setVisibility(View.GONE);
 
-        final String username=this.username.getText().toString().trim();
-        final String email=this.email.getText().toString().trim();
-        final String password=this.password.getText().toString().trim();
+            if (username.getText().toString().isEmpty() || useremail.getText().toString().isEmpty() || userpassword.getText().toString().isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Please enter all the details", Toast.LENGTH_SHORT).show();
 
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, URL_REGIST,
-                new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonObject= new JSONObject(response);
-                        String success=jsonObject.getString("success");
-                        if(success.equals("1")){
-                            Toast.makeText(RegisterActivity.this, "register succes", Toast.LENGTH_SHORT).show();
-
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(RegisterActivity.this, "register error " +e.toString(), Toast.LENGTH_SHORT).show();
-                        loading.setVisibility(View.GONE);
-                        button_register.setVisibility(View.VISIBLE);
-                        }
-                }
-            },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                        Toast.makeText(RegisterActivity.this, "register error" +error.toString(), Toast.LENGTH_SHORT).show();
-                        loading.setVisibility(View.GONE);
-                        button_register.setVisibility(View.VISIBLE);
-                    }
-                })
-
-    {
-        @Override
-        protected Map<String, String> getParams() throws AuthFailureError{
-            Map<String, String> params=new HashMap<>();
-            params.put("username", username);
-            params.put("email", email);
-            params.put("password", password);
-            return super.getParams();
+            } else {
+                result = true;
+            }
+            return result;
         }
-    };
-
-        RequestQueue requestQueue= Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
 
     }
-}
+
+
+
