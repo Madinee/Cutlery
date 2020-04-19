@@ -68,7 +68,6 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 //sendEmailVerification();
                                 Toast.makeText(RegisterActivity.this, "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
-                                finish();
                                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 
                             } else {
@@ -85,8 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
         private Boolean Register(){
             Boolean result = false;
-            loading.setVisibility(View.VISIBLE);
-            button_register.setVisibility(View.GONE);
+
 
             if (username.getText().toString().isEmpty() || useremail.getText().toString().isEmpty() || userpassword.getText().toString().isEmpty()) {
                 Toast.makeText(getApplicationContext(), "Please enter all the details", Toast.LENGTH_SHORT).show();
