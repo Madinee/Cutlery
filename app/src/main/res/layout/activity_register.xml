@@ -115,8 +115,8 @@
         <EditText
             android:id="@+id/password"
             android:inputType="textPassword"
-            android:hint="........."
-            android:textSize="20sp"
+            android:hint="at least 6 character"
+            android:textSize="18sp"
             android:drawableEnd="@drawable/ic_lock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,12 +128,6 @@
             android:layout_height="1dp"
             android:background="@color/colorAccent"/>
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/loading"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/button_register"
