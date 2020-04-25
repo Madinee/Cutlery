@@ -41,8 +41,8 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user=firebaseAuth.getCurrentUser();
-       /* if(user!=null){
-            finish();
+       /*if(user!=null){
+            finish();ss
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
         }*/
 
@@ -81,10 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()) {
-                        //sendEmailVerification();
-                        Toast.makeText(LoginActivity.this, "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
+                        checkEmail();
                     } else {
 
                         Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
@@ -97,5 +94,20 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
+    }
+    /*
+    verification de l'email si l'utilisateur existe deja
+     */
+    private void checkEmail(){
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        Boolean emailflag = firebaseUser.isEmailVerified();
+
+       if(emailflag){
+           finish();
+           startActivity(new Intent(LoginActivity.this, MainActivity.class));
+       }else{
+           Toast.makeText(this, "Verify your email", Toast.LENGTH_SHORT).show();
+           firebaseAuth.signOut();
+       }
     }
 }

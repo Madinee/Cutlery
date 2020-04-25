@@ -115,7 +115,7 @@
         <EditText
             android:id="@+id/password"
             android:inputType="textPassword"
-            android:hint="at least 6 character"
+            android:hint="at least 6 characters"
             android:textSize="18sp"
             android:drawableEnd="@drawable/ic_lock"
             android:layout_width="match_parent"
