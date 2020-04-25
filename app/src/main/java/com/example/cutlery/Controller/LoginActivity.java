@@ -42,10 +42,20 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user=firebaseAuth.getCurrentUser();
        /*if(user!=null){
-            finish();ss
+            finish();
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
         }*/
 
+       //rpermet de rediriger l'utilisateur vers la page de mot de passe oublié
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ForgotPassword.class));
+            }
+        });
+
+       //button permettant à l'utilisateur de se connecter
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

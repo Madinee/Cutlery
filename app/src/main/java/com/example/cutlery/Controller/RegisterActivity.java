@@ -27,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private TextView sign_in;
     private FirebaseAuth firebaseAuth;
-    //String name, email, password;
+
 
     private ProgressDialog progressDialog;
 
