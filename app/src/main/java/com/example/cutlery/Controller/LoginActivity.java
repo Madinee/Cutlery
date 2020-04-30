@@ -41,10 +41,10 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user=firebaseAuth.getCurrentUser();
-       /*if(user!=null){
+       if(user!=null){
             finish();
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        }*/
+        }
 
        //rpermet de rediriger l'utilisateur vers la page de mot de passe oublié
 
