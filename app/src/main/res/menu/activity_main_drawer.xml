@@ -5,14 +5,14 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_restaurant_menu"
+            android:id="@+id/nav_home_menu"
             android:icon="@drawable/ic_restaurant_menu"
             android:title="Menu" />
         <item
             android:id="@+id/nav_cart"
             android:icon="@drawable/ic_shopping_cart"
             android:title="Cart"
-            android:iconTint="@android:color/black"/>
+            />
         <item
             android:id="@+id/nav_reservation"
             android:icon="@drawable/ic_check_circle"
@@ -27,7 +27,7 @@
             android:title="Location" />
         <item
             android:id="@+id/nav_account"
-            android:icon="@drawable/ic_account_circle"
+            android:icon="@drawable/ic_account_box"
             android:title="My Account" />
         <item
             android:id="@+id/nav_about"
@@ -35,7 +35,7 @@
             android:title="About" />
         <item
             android:id="@+id/nav_sign_out"
-            android:icon="@drawable/ic_announcement"
+            android:icon="@drawable/ic_logout"
             android:title="Sign Out" />
 
     </group>
