@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.FrameLayout;
 
+import com.example.cutlery.Controller.ui.BreakfastFragment;
 import com.example.cutlery.Controller.ui.home.HomeFragment;
 import com.example.cutlery.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().getItem(0).setChecked(true);
 
         mainframLayout=findViewById(R.id.mainframLayout);
-        setFragment(new HomeFragment());
+//        setFragment(new HomeFragment());
+        setFragment(new BreakfastFragment());
 
     }
 

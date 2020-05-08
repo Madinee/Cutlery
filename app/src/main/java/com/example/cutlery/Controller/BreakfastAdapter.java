@@ -27,7 +27,7 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
     @Override
     public BreakfastAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.breakfast_card, parent, false);
-        return new BreakfastAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
         String name = list.get(position).getName();
         String image = list.get(position).getImage();
         int price = list.get(position).getPrice();
-        viewHolder.setMenu(name, image, price);
+        viewHolder.setMenu(image, name, price);
     }
 
     @Override
@@ -44,23 +44,24 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
 
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;
         private ImageView imageView;
-        private TextView price;
+        private TextView textViewprice;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.text);
+            textView = (TextView) itemView.findViewById(R.id.name);
             imageView = (ImageView) itemView.findViewById(R.id.image);
-            price = itemView.findViewById(R.id.price);
+            textViewprice = itemView.findViewById(R.id.price);
 
         }
 
-        public void setMenu(String name, String image, int price) {
-            textView.setText(name);
+        public void setMenu(String image, String name, int price) {
             Picasso.get().load(image).centerCrop().fit().into(imageView);
-            textView.setText(price);
+            textViewprice.setText(String.valueOf(price));
+            textView.setText(name);
+//            textView.setText(name);
         }
     }
 }
