@@ -6,11 +6,13 @@ public class MenuModel {
 
     public MenuModel(String image, String category) {
         this.image = image;
-        this.name = category;
+        this.category = category;
     }
 
-    //constructor
-    public MenuModel() {
+    public MenuModel(String image, String name, int price) {
+        this.image = image;
+        this.name = name;
+        this.price=price;
     }
 
     //getter setter
