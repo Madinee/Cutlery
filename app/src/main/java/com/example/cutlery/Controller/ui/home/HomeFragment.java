@@ -1,6 +1,7 @@
 package com.example.cutlery.Controller.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +17,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cutlery.Controller.MenuAdapter;
 import com.example.cutlery.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import Model.MenuModel;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class HomeFragment extends Fragment {
 
     //private HomeViewModel homeViewModel;
     private RecyclerView recyclerView;
-    private List<MenuModel> menuList = new ArrayList<>();
+    private List<MenuModel> menuList = new ArrayList<MenuModel>();
+    private FirebaseFirestore firebaseFirestore;
+    private  MenuAdapter menuAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,16 +47,29 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        menuList.add(new MenuModel("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnewyork.seriouseats.com%2Fimages%2F20120221-baobq-specials-1.jpg&f=1&nofb=1", "dessert"));
-        menuList.add(new MenuModel("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnewyork.seriouseats.com%2Fimages%2F20120221-baobq-specials-1.jpg&f=1&nofb=1", "dessert"));
-        menuList.add(new MenuModel("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnewyork.seriouseats.com%2Fimages%2F20120221-baobq-specials-1.jpg&f=1&nofb=1", "dessert"));
-        menuList.add(new MenuModel("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnewyork.seriouseats.com%2Fimages%2F20120221-baobq-specials-1.jpg&f=1&nofb=1", "dessert"));
-        menuList.add(new MenuModel("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnewyork.seriouseats.com%2Fimages%2F20120221-baobq-specials-1.jpg&f=1&nofb=1", "dessert"));
-
-
-        MenuAdapter menuAdapter=new MenuAdapter(menuList);
+        menuAdapter=new MenuAdapter(menuList);
         recyclerView.setAdapter(menuAdapter);
-        menuAdapter.notifyDataSetChanged();
+        //firebase storage
+        firebaseFirestore=FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("MENU").limit(5).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
+
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                               menuList.add(new MenuModel(document.get("image").toString(), document.get("category").toString()));
+
+                            }
+                            menuAdapter.notifyDataSetChanged();
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+
+
         return root;
     }
 }

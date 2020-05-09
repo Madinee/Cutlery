@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.FrameLayout;
 
-import com.example.cutlery.Controller.ui.BreakfastFragment;
 import com.example.cutlery.Controller.ui.home.HomeFragment;
 import com.example.cutlery.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -14,14 +13,10 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,7 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private AppBarConfiguration mAppBarConfiguration;
-    private FrameLayout mainframLayout;
+     FrameLayout mainframLayout;
 
     @Override
 
@@ -68,8 +63,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().getItem(0).setChecked(true);
 
         mainframLayout=findViewById(R.id.mainframLayout);
-//        setFragment(new HomeFragment());
-        setFragment(new BreakfastFragment());
+       setFragment(new HomeFragment());
+        //setFragment(new Breakfast());
 
     }
 

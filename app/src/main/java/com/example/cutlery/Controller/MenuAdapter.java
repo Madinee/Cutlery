@@ -1,5 +1,7 @@
 package com.example.cutlery.Controller;
 
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +12,6 @@ import com.example.cutlery.R;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.core.Context;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import Model.MenuModel;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
     private List<MenuModel> list;
+
 
     public MenuAdapter(List<MenuModel> list) {
         this.list = list;
@@ -27,6 +29,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
     @Override
     public MenuAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_card,parent,false);
+
         return new ViewHolder(view);
 
     }
@@ -52,15 +55,29 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.text);
+            textView.setTypeface(null, Typeface.BOLD);
             imageView = (ImageView) itemView.findViewById(R.id.image);
 
+            //framlatout
+
+
         }
-        public void setMenu( String category, String image){
+        public void setMenu(final String category, String image) {
             textView.setText(category);
-            Picasso.get().load(image).centerCrop().fit().into(imageView);
+            if (!image.equals("null")) {
+                Picasso.get().load(image).centerCrop().fit().into(imageView);
+            }
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (category.equals("Breakfast")) {
+                        Intent intent = new Intent(itemView.getContext(), BreakfastActivity.class);
+                        itemView.getContext().startActivity(intent);
+                    }
+                }
+            });
         }
-
-
 
     }
 }

@@ -59,9 +59,8 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
 
         public void setMenu(String image, String name, int price) {
             Picasso.get().load(image).centerCrop().fit().into(imageView);
-            textViewprice.setText(String.valueOf(price));
+            textViewprice.setText(String.valueOf(price)+"€");
             textView.setText(name);
-//            textView.setText(name);
         }
     }
 }
