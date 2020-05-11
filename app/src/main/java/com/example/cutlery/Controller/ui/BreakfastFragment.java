@@ -1,22 +1,24 @@
-package com.example.cutlery.Controller;
+package com.example.cutlery.Controller.ui;
+
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.cutlery.Controller.BreakfastAdapter;
 import com.example.cutlery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,25 +27,42 @@ import Model.MenuModel;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class BreakfastActivity extends AppCompatActivity {
+
+public class BreakfastFragment extends Fragment {
     private RecyclerView recyclerView_breakfast;
     private List<MenuModel> breakfastList = new ArrayList<>();
     private FirebaseFirestore firebaseFirestore;
-    private String title;
     BreakfastAdapter breakfastAdapter;
+
+    public BreakfastFragment() {
+        // Required empty public constructor
+    }
+
+//     public static BreakfastFragment newInstance(String param1, String param2) {
+//        BreakfastFragment fragment = new BreakfastFragment();
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
+//
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
+//    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_breakfast);
-        //ajout du toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-
-
-
-        recyclerView_breakfast = findViewById(R.id.recyclerview_breakfast);
-        GridLayoutManager gridlayout=new GridLayoutManager(this,2);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View root= inflater.inflate(R.layout.fragment_breakfast, container, false);
+        recyclerView_breakfast = root.findViewById(R.id.recyclerview_breakfast);
+        GridLayoutManager gridlayout=new GridLayoutManager(getContext(),2);
         recyclerView_breakfast.setLayoutManager(gridlayout);
 
         breakfastAdapter=new BreakfastAdapter(breakfastList);
@@ -65,34 +84,7 @@ public class BreakfastActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.search) {
-            return true;
-        }
-        else if(id==R.id.filter){
-            return true;
-        }
-        else if(id==R.id.cart){
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return root;
     }
 }
+

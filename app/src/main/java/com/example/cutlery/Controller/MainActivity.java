@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.FrameLayout;
 
+import com.example.cutlery.Controller.ui.BreakfastFragment;
 import com.example.cutlery.Controller.ui.home.HomeFragment;
 import com.example.cutlery.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private AppBarConfiguration mAppBarConfiguration;
      FrameLayout mainframLayout;
+     private String title;
 
     @Override
 
@@ -33,7 +35,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +67,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mainframLayout=findViewById(R.id.mainframLayout);
        setFragment(new HomeFragment());
-        //setFragment(new Breakfast());
+        //recuperation du titre de l'action bar et redirection vers le fragment correspondant
+//        title=getIntent().getStringExtra("category");
+//        assert title != null;
+//        if(title.equals("Breakfast")){
+//            setFragment(new BreakfastFragment() );
+//            getSupportActionBar().setTitle(title);
+//            getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        }
 
     }
 
@@ -78,32 +88,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.search) {
-            return true;
-        }
-        else if(id==R.id.filter){
-            return true;
-        }
-        else if(id==R.id.cart){
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.search) {
+//            return true;
+//        }
+//        else if(id==R.id.filter){
+//            return true;
+//        }
+//        else if(id==R.id.cart){
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {

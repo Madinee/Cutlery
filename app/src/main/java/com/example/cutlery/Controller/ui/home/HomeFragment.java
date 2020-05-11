@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(menuAdapter);
         //firebase storage
         firebaseFirestore=FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("MENU").limit(5).get()
+        firebaseFirestore.collection("CATEGORY").limit(5).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
 
                     @Override

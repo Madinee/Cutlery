@@ -71,10 +71,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (category.equals("Breakfast")) {
                         Intent intent = new Intent(itemView.getContext(), BreakfastActivity.class);
+                        intent.putExtra("category", category);
                         itemView.getContext().startActivity(intent);
-                    }
                 }
             });
         }
