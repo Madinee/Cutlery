@@ -8,7 +8,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cutlery.Controller.ui.AppetizerFragment;
 import com.example.cutlery.Controller.ui.BreakfastFragment;
+import com.example.cutlery.Controller.ui.DessertFragment;
+import com.example.cutlery.Controller.ui.DinnerFragment;
 import com.example.cutlery.Controller.ui.LunchFragment;
 import com.example.cutlery.Controller.ui.home.HomeFragment;
 import com.example.cutlery.R;
@@ -48,21 +51,42 @@ public class BreakfastActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
 
-//permet d'aller sur les differentes pages de menu(breakfas, lunch, dessert etc)
+//permet d'aller sur les differentes pages de menu(breakfas, lunch, dessert etc) enfonction de la valeur de stringextra
         mainframLayout=findViewById(R.id.mainframLayout);
         title=getIntent().getStringExtra("category");
         assert title != null;
 
-        if(title.equals("Breakfast")){
-            setFragment(new BreakfastFragment());
-            getSupportActionBar().setTitle(title);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-        else if(title.equals("Lunch")){
-            setFragment(new LunchFragment());
-            getSupportActionBar().setTitle(title);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        switch (title) {
+            case "Breakfast":
+                setFragment(new BreakfastFragment());
+                getSupportActionBar().setTitle(title);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
+                break;
+            case "Lunch":
+                setFragment(new LunchFragment());
+                getSupportActionBar().setTitle(title);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
+                break;
+            case "Appetizers":
+                setFragment(new AppetizerFragment());
+                getSupportActionBar().setTitle(title);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
+                break;
+            case "Dinner":
+                setFragment(new DinnerFragment());
+                getSupportActionBar().setTitle(title);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
+                break;
+            case "Dessert":
+                setFragment(new DessertFragment());
+                getSupportActionBar().setTitle(title);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
+                break;
         }
 
     }
