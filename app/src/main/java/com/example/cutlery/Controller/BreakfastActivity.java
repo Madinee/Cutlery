@@ -3,9 +3,14 @@ package com.example.cutlery.Controller;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cutlery.Controller.ui.BreakfastFragment;
+import com.example.cutlery.Controller.ui.LunchFragment;
+import com.example.cutlery.Controller.ui.home.HomeFragment;
 import com.example.cutlery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,6 +22,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +37,7 @@ public class BreakfastActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private String title;
     BreakfastAdapter breakfastAdapter;
+    FrameLayout mainframLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,30 +48,22 @@ public class BreakfastActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
 
+//permet d'aller sur les differentes pages de menu(breakfas, lunch, dessert etc)
+        mainframLayout=findViewById(R.id.mainframLayout);
+        title=getIntent().getStringExtra("category");
+        assert title != null;
 
-        recyclerView_breakfast = findViewById(R.id.recyclerview_breakfast);
-        GridLayoutManager gridlayout=new GridLayoutManager(this,2);
-        recyclerView_breakfast.setLayoutManager(gridlayout);
-
-        breakfastAdapter=new BreakfastAdapter(breakfastList);
-        recyclerView_breakfast.setAdapter(breakfastAdapter);
-
-        firebaseFirestore=FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("MENU").orderBy("name").get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
-
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                breakfastList.add(new MenuModel(document.get("image").toString(), document.get("name").toString(), ((Long)document.get("price")).intValue()));
-                            }
-                            breakfastAdapter.notifyDataSetChanged();
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
+        if(title.equals("Breakfast")){
+            setFragment(new BreakfastFragment());
+            getSupportActionBar().setTitle(title);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+        else if(title.equals("Lunch")){
+            setFragment(new LunchFragment());
+            getSupportActionBar().setTitle(title);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
     }
 
@@ -94,5 +93,17 @@ public class BreakfastActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    private void setFragment(Fragment fragment){
+        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(mainframLayout.getId(),fragment);
+        fragmentTransaction.commit();
     }
 }

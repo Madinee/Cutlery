@@ -69,7 +69,9 @@ public class BreakfastFragment extends Fragment {
         recyclerView_breakfast.setAdapter(breakfastAdapter);
 
         firebaseFirestore=FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("MENU").orderBy("name").get()
+        firebaseFirestore.collection("MENU")
+                .whereEqualTo("category", "Breakfast")
+                .orderBy("name").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
 
                     @Override
