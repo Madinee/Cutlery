@@ -14,6 +14,7 @@ import com.example.cutlery.Controller.Fragment.LunchFragment;
 import com.example.cutlery.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,31 +48,26 @@ public class BreakfastActivity extends AppCompatActivity {
                 setFragment(new BreakfastFragment());
                 getSupportActionBar().setTitle(title);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setDisplayShowHomeEnabled(true);
                 break;
             case "Lunch":
                 setFragment(new LunchFragment());
                 getSupportActionBar().setTitle(title);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setDisplayShowHomeEnabled(true);
                 break;
             case "Appetizers":
                 setFragment(new AppetizerFragment());
                 getSupportActionBar().setTitle(title);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setDisplayShowHomeEnabled(true);
                 break;
             case "Dinner":
                 setFragment(new DinnerFragment());
                 getSupportActionBar().setTitle(title);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setDisplayShowHomeEnabled(true);
                 break;
             case "Dessert":
                 setFragment(new DessertFragment());
                 getSupportActionBar().setTitle(title);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setDisplayShowHomeEnabled(true);
                 break;
         }
 
@@ -99,6 +95,8 @@ public class BreakfastActivity extends AppCompatActivity {
             return true;
         }
         else if(id==R.id.cart){
+            Intent intent = new Intent(BreakfastActivity.this, CartActivity.class);
+            startActivity(intent);
             return true;
         }
 

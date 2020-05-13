@@ -6,13 +6,16 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.cutlery.R;
 import com.squareup.picasso.Picasso;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MenuDetailActivity extends AppCompatActivity {
 
@@ -58,6 +61,12 @@ public class MenuDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //go to cart and reservation page
+        add_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MenuDetailActivity.this, "Your menu is add to cart, check your cart", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -75,6 +84,10 @@ public class MenuDetailActivity extends AppCompatActivity {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.cart) {
+            Intent intent = new Intent(MenuDetailActivity.this, CartActivity.class);
+            intent.putExtra("name", name);
+            intent.putExtra("price", price);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -4,8 +4,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
+import com.example.cutlery.Controller.Fragment.BreakfastFragment;
+import com.example.cutlery.Controller.Fragment.CartFragment;
 import com.example.cutlery.Controller.Fragment.HomeFragment;
+import com.example.cutlery.Controller.Fragment.ReservationFragment;
 import com.example.cutlery.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
 //        FloatingActionButton fab = findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -51,11 +55,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        /*mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_menu, R.id.nav_gallery, R.id.nav_cart, R.id.nav_reservation, R.id.nav_location,
-                R.id.nav_account,  R.id.nav_about,  R.id.nav_sign_out)
-                .setDrawerLayout(drawer)
-                .build();*/
+//        mAppBarConfiguration = new AppBarConfiguration.Builder(
+//                R.id.nav_home_menu, R.id.nav_gallery, R.id.nav_cart, R.id.nav_reservation, R.id.nav_location,
+//                R.id.nav_account,  R.id.nav_about,  R.id.nav_sign_out)
+//                .setDrawerLayout(drawer)
+//                .build();
         //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
        // NavigationUI.setupWithNavController(navigationView, navController);
@@ -116,12 +120,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         int id = menuItem.getItemId();
-
         if (id == R.id.nav_home_menu) {
+            setFragment(new HomeFragment());
+            getSupportActionBar().setTitle("Menu");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         else if(id==R.id.nav_cart){
+            setFragment(new CartFragment());
+            getSupportActionBar().setTitle("Cart");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         else if(id==R.id.nav_reservation){
+            setFragment(new ReservationFragment());
+            getSupportActionBar().setTitle("Reservation");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         else if(id==R.id.nav_gallery){
         }
