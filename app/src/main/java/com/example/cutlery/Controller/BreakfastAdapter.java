@@ -1,5 +1,6 @@
 package com.example.cutlery.Controller;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,10 +58,22 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
 
         }
 
-        public void setMenu(String image, String name, int price) {
+        public void setMenu(final String image, final String name, final int price) {
             Picasso.get().load(image).centerCrop().fit().into(imageView);
             textViewprice.setText(String.valueOf(price)+"€");
             textView.setText(name);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), MenuDetailActivity.class);
+                    intent.putExtra("name", name);
+                    intent.putExtra("image", image);
+                    intent.putExtra("price", price);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }

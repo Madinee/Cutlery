@@ -1,4 +1,4 @@
-package com.example.cutlery.Controller.ui;
+package com.example.cutlery.Controller.Fragment;
 
 import android.os.Bundle;
 
@@ -28,13 +28,13 @@ import Model.MenuModel;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
-public class DessertFragment extends Fragment {
+public class DinnerFragment extends Fragment {
     private RecyclerView recyclerView_breakfast;
     private List<MenuModel> breakfastList = new ArrayList<>();
     private FirebaseFirestore firebaseFirestore;
     BreakfastAdapter breakfastAdapter;
 
-    public DessertFragment() {
+    public DinnerFragment() {
         // Required empty public constructor
     }
 
@@ -44,7 +44,7 @@ public class DessertFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root= inflater.inflate(R.layout.fragment_dessert, container, false);
+        View root= inflater.inflate(R.layout.fragment_dinner, container, false);
         recyclerView_breakfast = root.findViewById(R.id.recyclerview_breakfast);
         GridLayoutManager gridlayout=new GridLayoutManager(getContext(),2);
         recyclerView_breakfast.setLayoutManager(gridlayout);
@@ -54,7 +54,7 @@ public class DessertFragment extends Fragment {
 
         firebaseFirestore=FirebaseFirestore.getInstance();
         firebaseFirestore.collection("MENU")
-                .whereEqualTo("category", "Dessert")
+                .whereEqualTo("category", "Dinner")
                 .orderBy("name").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
 

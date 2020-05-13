@@ -1,28 +1,20 @@
 package com.example.cutlery.Controller;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cutlery.Controller.ui.AppetizerFragment;
-import com.example.cutlery.Controller.ui.BreakfastFragment;
-import com.example.cutlery.Controller.ui.DessertFragment;
-import com.example.cutlery.Controller.ui.DinnerFragment;
-import com.example.cutlery.Controller.ui.LunchFragment;
-import com.example.cutlery.Controller.ui.home.HomeFragment;
+import com.example.cutlery.Controller.Fragment.AppetizerFragment;
+import com.example.cutlery.Controller.Fragment.BreakfastFragment;
+import com.example.cutlery.Controller.Fragment.DessertFragment;
+import com.example.cutlery.Controller.Fragment.DinnerFragment;
+import com.example.cutlery.Controller.Fragment.LunchFragment;
 import com.example.cutlery.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -32,14 +24,8 @@ import java.util.List;
 
 import Model.MenuModel;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
 public class BreakfastActivity extends AppCompatActivity {
-    private RecyclerView recyclerView_breakfast;
-    private List<MenuModel> breakfastList = new ArrayList<>();
-    private FirebaseFirestore firebaseFirestore;
     private String title;
-    BreakfastAdapter breakfastAdapter;
     FrameLayout mainframLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
