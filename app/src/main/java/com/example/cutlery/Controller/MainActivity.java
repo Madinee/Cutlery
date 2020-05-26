@@ -53,30 +53,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        mAppBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.nav_home_menu, R.id.nav_gallery, R.id.nav_cart, R.id.nav_reservation, R.id.nav_location,
-//                R.id.nav_account,  R.id.nav_about,  R.id.nav_sign_out)
-//                .setDrawerLayout(drawer)
-//                .build();
-        //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-       // NavigationUI.setupWithNavController(navigationView, navController);
+
 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
         mainframLayout=findViewById(R.id.mainframLayout);
        setFragment(new HomeFragment());
-        //recuperation du titre de l'action bar et redirection vers le fragment correspondant
-//        title=getIntent().getStringExtra("category");
-//        assert title != null;
-//        if(title.equals("Breakfast")){
-//            setFragment(new BreakfastFragment() );
-//            getSupportActionBar().setTitle(title);
-//            getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        }
+
 
     }
 
