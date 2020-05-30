@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.cutlery.Controller.BreakfastAdapter;
+import com.example.cutlery.Controller.Adapter.BreakfastAdapter;
 import com.example.cutlery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

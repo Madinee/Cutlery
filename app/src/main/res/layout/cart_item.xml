@@ -9,7 +9,6 @@
         android:id="@+id/card_myevent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cardElevation="5dp"
         >
         <RelativeLayout
             android:id="@+id/linear"
@@ -32,31 +31,28 @@
                 android:layout_alignParentStart="true"
 
                 />
+            <TextView
+                android:id="@+id/menu_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/menu_name"
+                android:layout_marginStart="90dp"
+                android:text="qty"
+                android:layout_marginTop="12dp"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                />
 
             <TextView
                 android:id="@+id/menu_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/menu_name"
+                android:layout_toEndOf="@id/menu_quantity"
                 android:layout_marginStart="90dp"
                 android:text="Price"
                 android:layout_marginTop="12dp"
                 android:textAlignment="center"
                 android:textSize="18sp"
-                />
-            <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-                android:id="@+id/menu_quantity"
-                android:layout_width="50dp"
-                android:layout_height="25dp"
-                app:backGroundColor="@android:color/white"
-                app:textColor="@color/colorBlackLight"
-                android:layout_toEndOf="@id/menu_price"
-                android:layout_marginStart="75dp"
-                android:layout_marginTop="12dp"
-                app:initialNumber="1"
-                app:finalNumber="10"
-                android:textSize="16sp"
-
                 />
 
             <ImageView

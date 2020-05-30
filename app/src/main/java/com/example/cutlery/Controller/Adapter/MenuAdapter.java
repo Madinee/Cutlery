@@ -1,4 +1,4 @@
-package com.example.cutlery.Controller;
+package com.example.cutlery.Controller.Adapter;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.cutlery.Controller.BreakfastActivity;
 import com.example.cutlery.R;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

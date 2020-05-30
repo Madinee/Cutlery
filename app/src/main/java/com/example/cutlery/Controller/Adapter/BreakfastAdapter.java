@@ -1,4 +1,4 @@
-package com.example.cutlery.Controller;
+package com.example.cutlery.Controller.Adapter;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cutlery.Controller.MenuDetailActivity;
 import com.example.cutlery.R;
 import com.squareup.picasso.Picasso;
 
