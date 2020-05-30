@@ -3,23 +3,25 @@ package Model;
 public class CartModel {
 
     //cart item
-    private String  name;
-    private int price, quantity;
+    private String  name, quantity;
+    private int price;
 
-    public CartModel(String name, int price, int quantity) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
+    public CartModel() {
     }
 
-    public int getQuantity() {
+    public CartModel(String name, String quantity, int price) {
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
-
 
     public String getName() {
         return name;
@@ -38,9 +40,5 @@ public class CartModel {
         this.price = price;
     }
     // cart item
-
-    //cart total
-
-    private  String totalAmount;
 
 }

@@ -86,7 +86,6 @@ public class MenuDetailActivity extends AppCompatActivity {
 
     private void addingToCartList() {
 
-//        final FirebaseUser user =  auth.currentUser();
         final FirebaseUser user =  auth.getCurrentUser();
         String uid = user.getUid();
         System.out.println("uid:"+uid);
@@ -119,13 +118,6 @@ public class MenuDetailActivity extends AppCompatActivity {
                 });
     }
 
-//    Future<String> getUid() async {
-//        ExecutorService asyncExecutor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());        final FirebaseUser user = await FirebaseAuth.instance.currentUser();
-//
-//        final FirebaseUser user = FirebaseAuth.instance.currentUser();
-//        final String uid = user.uid.toString();
-//        return uid;
-//    }
 
 
     @Override
@@ -143,8 +135,8 @@ public class MenuDetailActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.cart) {
             Intent intent = new Intent(MenuDetailActivity.this, CartActivity.class);
-            intent.putExtra("name", name);
-            intent.putExtra("price", price);
+//            intent.putExtra("name", name);
+//            intent.putExtra("price", price);
             startActivity(intent);
             return true;
         }

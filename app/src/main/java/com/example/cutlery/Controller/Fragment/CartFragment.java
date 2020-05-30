@@ -2,64 +2,118 @@ package com.example.cutlery.Controller.Fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.cutlery.Controller.Adapter.CartViewHolder;
 import com.example.cutlery.R;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CartFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+import Model.CartModel;
+
+import static android.content.ContentValues.TAG;
+
+
 public class CartFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private RecyclerView recyclerView_cart;
+    private List<CartModel> cartList = new ArrayList<>();
+    private TextView totalAmount;
+    private Button reservation;
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public CartFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CartFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CartFragment newInstance(String param1, String param2) {
-        CartFragment fragment = new CartFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false);
+        View root= inflater.inflate(R.layout.fragment_cart, container, false);
+
+        recyclerView_cart = root.findViewById(R.id.recyclerview_cart);
+        recyclerView_cart.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
+        recyclerView_cart.setLayoutManager(linearLayoutManager);
+
+        //adapter recycleview
+
+
+        //get current user uid
+
+        final FirebaseUser user =  auth.getCurrentUser();
+        String uid = user.getUid();
+
+        //firebase data
+        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference();
+
+        FirebaseRecyclerOptions<CartModel> options =new FirebaseRecyclerOptions.Builder<CartModel>()
+                .setQuery(cartListRef.child("CART")
+                        .child(uid), CartModel.class)
+                        .build();
+        FirebaseRecyclerAdapter<CartModel, CartViewHolder>adapter
+                =new FirebaseRecyclerAdapter<CartModel, CartViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull CartModel model) {
+                holder.textView_name.setText(model.getName());
+                holder.textView_price.setText(String.valueOf(model.getPrice()));
+                holder.textView_quantity.setText(model.getQuantity());
+            }
+
+            @NonNull
+            @Override
+
+            public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item, parent, false);
+                CartViewHolder holder = new CartViewHolder(view);
+                return holder;
+            }
+        };
+        recyclerView_cart.setAdapter(adapter);
+        adapter.startListening();
+
+        return root;
     }
 }
+
+/*cartListRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+                    CartModel cartModel = singleSnapshot.getValue(CartModel.class);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled", databaseError.toException());
+            }*/

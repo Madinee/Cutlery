@@ -15,6 +15,7 @@ import com.example.cutlery.Controller.Adapter.MenuAdapter;
 import com.example.cutlery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -33,6 +34,7 @@ public class HomeFragment extends Fragment {
     private List<MenuModel> menuList = new ArrayList<MenuModel>();
     private FirebaseFirestore firebaseFirestore;
     private  MenuAdapter menuAdapter;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
