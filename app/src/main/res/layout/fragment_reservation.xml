@@ -1,14 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Controller.Fragment.ReservationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="your Name"
+        />
+
+    <EditText
+        android:id="@+id/phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:inputType="number"
+        android:layout_marginRight="20dp"
+        android:hint="your Phone Number"
+        />
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phone_number"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="your Email Address"
+        />
+
+    <EditText
+        android:id="@+id/number_of_poeple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/address"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Number of poeple"
+        />
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/number_of_poeple"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/in_date"
+            android:layout_marginTop="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SELECT DATE"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"
+            android:id="@+id/btn_date"
+            android:layout_marginTop="25dp"
+            android:layout_alignBottom="@+id/in_date"
+            android:layout_toRightOf="@+id/in_date"
+            android:layout_toEndOf="@+id/in_date" />
+
+        <EditText
+            android:layout_marginTop="25dp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/in_time"
+            android:layout_below="@+id/in_date"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SELECT TIME"
+            android:id="@+id/btn_time"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"
+            android:layout_below="@+id/btn_date"
+            android:layout_alignLeft="@+id/btn_date"
+            android:layout_alignStart="@+id/btn_date" />
+
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/confirm_final_order_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:text="CONFIRM YOUR RESERVATION"
+        android:background="@drawable/shape_button"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        />
+
+
+</RelativeLayout>

@@ -39,7 +39,6 @@ public class MenuDetailActivity extends AppCompatActivity {
     private ElegantNumberButton menu_quantity;
     Button reservation, add_to_cart;
     final FirebaseAuth auth = FirebaseAuth.getInstance();
-    String saveCurrentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +82,8 @@ public class MenuDetailActivity extends AppCompatActivity {
             }
         });
 
+        //btn reservation
+        
     }
 
     private void addingToCartList() {
@@ -90,8 +91,6 @@ public class MenuDetailActivity extends AppCompatActivity {
         final FirebaseUser user =  auth.getCurrentUser();
         String uid = user.getUid();
         System.out.println("uid:"+uid);
-
-
 
 //        Calendar calForDate = Calendar.getInstance();
 //        SimpleDateFormat currentDate = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");

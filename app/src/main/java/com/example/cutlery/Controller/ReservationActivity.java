@@ -10,13 +10,14 @@ import com.example.cutlery.R;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
-public class CartActivity extends AppCompatActivity {
+public class ReservationActivity extends AppCompatActivity {
     FrameLayout mainframLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+        setContentView(R.layout.activity_reservation);
+
 
         //ajout du toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -26,7 +27,7 @@ public class CartActivity extends AppCompatActivity {
         mainframLayout=findViewById(R.id.mainframLayout);
 
         setFragment(new CartFragment());
-        getSupportActionBar().setTitle("Cart");
+        getSupportActionBar().setTitle("Reservation");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -44,4 +45,5 @@ public class CartActivity extends AppCompatActivity {
         fragmentTransaction.replace(mainframLayout.getId(),fragment);
         fragmentTransaction.commit();
     }
+
 }

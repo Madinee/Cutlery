@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.cutlery">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <application
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:replace="android:theme"
+    <application xmlns:tools="http://schemas.android.com/tools"
         android:allowBackup="true"
         android:configChanges="orientation|screenSize"
         android:icon="@mipmap/ic_launcher"
@@ -14,8 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".Controller.CartActivity"></activity>
+        android:usesCleartextTraffic="true"
+        tools:replace="android:theme">
+        <activity android:name=".Controller.ReservationActivity"></activity>
+        <activity android:name=".Controller.CartActivity" />
         <activity android:name=".Controller.MenuDetailActivity" />
         <activity android:name=".Controller.BreakfastActivity" />
         <activity
