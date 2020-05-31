@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.cutlery.R;
 
@@ -24,6 +26,8 @@ public class ReservationFragment extends Fragment implements
     Button btnDatePicker, btnTimePicker;
     EditText txtDate, txtTime;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private EditText name, phone_number, address, number_of_poeple;
+    private Button confirmBtn;
 
     public ReservationFragment() {
         // Required empty public constructor
@@ -43,13 +47,25 @@ public class ReservationFragment extends Fragment implements
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_reservation, container, false);
 
+        //find view
         btnDatePicker=view.findViewById(R.id.btn_date);
         btnTimePicker=view.findViewById(R.id.btn_time);
         txtDate=view.findViewById(R.id.in_date);
         txtTime=view.findViewById(R.id.in_time);
 
+
+        number_of_poeple = view.findViewById(R.id.number_of_poeple);
+        name=view.findViewById(R.id.name);
+        phone_number=view.findViewById(R.id.phone_number);
+        address=view.findViewById(R.id.address);
+        confirmBtn=view.findViewById(R.id.confirmBtn);
+
+
+
         btnDatePicker.setOnClickListener(this);
         btnTimePicker.setOnClickListener(this);
+        confirmBtn.setOnClickListener(this);
+
 
         return view;
 
@@ -100,6 +116,34 @@ public class ReservationFragment extends Fragment implements
                     }, mHour, mMinute, false);
             timePickerDialog.show();
         }
+        if (v == confirmBtn) {
+            Check();
+        }
 
+    }
+
+
+    private void Check()
+    {
+        if (TextUtils.isEmpty(name.getText().toString()))
+        {
+            Toast.makeText(getActivity(), "Please provide your full name.", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(phone_number.getText().toString()))
+        {
+            Toast.makeText(getActivity(), "Please provide your phone number.", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(address.getText().toString()))
+        {
+            Toast.makeText(getActivity(), "Please provide your email address.", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(number_of_poeple.getText().toString()))
+        {
+            Toast.makeText(getActivity(), "Please provide number of people.", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            //ConfirmOrder();
+        }
     }
 }

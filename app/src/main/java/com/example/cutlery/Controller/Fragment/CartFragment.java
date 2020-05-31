@@ -19,8 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cutlery.Controller.Adapter.CartViewHolder;
+import com.example.cutlery.Controller.LoginActivity;
 import com.example.cutlery.Controller.MainActivity;
 import com.example.cutlery.Controller.MenuDetailActivity;
+import com.example.cutlery.Controller.ReservationActivity;
 import com.example.cutlery.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -74,10 +76,16 @@ public class CartFragment extends Fragment {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         recyclerView_cart.setLayoutManager(linearLayoutManager);
 
-        //get extrat
-      final String  saveCurrentDate=getActivity().getIntent().getStringExtra("saveCurrentDate");
+      //find reservation view
 
-
+       /* reservation=root.findViewById(R.id.reservation);
+        reservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ReservationActivity.class));
+            }
+        });
+*/
         //get current user uid
 
         final FirebaseUser user =  auth.getCurrentUser();
