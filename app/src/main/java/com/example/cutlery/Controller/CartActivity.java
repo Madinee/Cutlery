@@ -26,9 +26,9 @@ public class CartActivity extends AppCompatActivity {
         mainframLayout=findViewById(R.id.mainframLayout);
 
         setFragment(new CartFragment());
-
         getSupportActionBar().setTitle("Cart");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
 

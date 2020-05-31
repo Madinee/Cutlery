@@ -39,6 +39,7 @@ public class MenuDetailActivity extends AppCompatActivity {
     private ElegantNumberButton menu_quantity;
     Button reservation, add_to_cart;
     final FirebaseAuth auth = FirebaseAuth.getInstance();
+    String saveCurrentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,12 +91,12 @@ public class MenuDetailActivity extends AppCompatActivity {
         String uid = user.getUid();
         System.out.println("uid:"+uid);
 
-        String saveCurrentTime, saveCurrentDate;
 
-        Calendar calForDate = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-        saveCurrentDate = currentDate.format(calForDate.getTime());
-        System.out.println("date:"+saveCurrentDate);
+
+//        Calendar calForDate = Calendar.getInstance();
+//        SimpleDateFormat currentDate = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+//        saveCurrentDate = currentDate.format(calForDate.getTime());
+//        System.out.println("date:"+saveCurrentDate);
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference("CART");
 
         final HashMap<String, Object> cartMap = new HashMap<>();
@@ -104,7 +105,7 @@ public class MenuDetailActivity extends AppCompatActivity {
         cartMap.put("quantity", menu_quantity.getNumber());
 
         cartListRef.child(uid)
-                .child(saveCurrentDate)
+                .child(name)
                 .updateChildren(cartMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -135,7 +136,6 @@ public class MenuDetailActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.cart) {
             Intent intent = new Intent(MenuDetailActivity.this, CartActivity.class);
-//            intent.putExtra("name", name);
 //            intent.putExtra("price", price);
             startActivity(intent);
             return true;

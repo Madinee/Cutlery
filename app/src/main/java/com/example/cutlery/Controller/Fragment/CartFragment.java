@@ -50,6 +50,7 @@ public class CartFragment extends Fragment {
     final FirebaseAuth auth = FirebaseAuth.getInstance();
 
 
+
     public CartFragment() {
         // Required empty public constructor
     }
@@ -73,7 +74,8 @@ public class CartFragment extends Fragment {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         recyclerView_cart.setLayoutManager(linearLayoutManager);
 
-        //adapter recycleview
+        //get extrat
+      final String  saveCurrentDate=getActivity().getIntent().getStringExtra("saveCurrentDate");
 
 
         //get current user uid
@@ -102,24 +104,15 @@ public class CartFragment extends Fragment {
                     {
                         CharSequence options[] = new CharSequence[]
                                 {
-                                        "Edit",
                                         "Remove"
                                 };
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setTitle("Cart Options:");
 
                         builder.setItems(options, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i)
                             {
-                                if (i == 0)
-                                {
-                                    Intent intent = new Intent(getActivity(), MenuDetailActivity.class);
-                                    intent.putExtra("name", model.getName());
-                                    startActivity(intent);
-                                }
-                                if (i == 1)
-                                {
+
                                     cartListRef.child("CART")
                                             .child(uid)
                                             .child(model.getName())
@@ -131,14 +124,12 @@ public class CartFragment extends Fragment {
                                                     {
                                                         Toast.makeText(getActivity(), "Item removed successfully.", Toast.LENGTH_SHORT).show();
 
-                                                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                                                        startActivity(intent);
                                                     }
                                                 }
 
 
                                             });
-                                }
+
                             }
                         });
                         builder.show();
