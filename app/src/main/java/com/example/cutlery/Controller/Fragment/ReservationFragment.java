@@ -150,7 +150,7 @@ public class ReservationFragment extends Fragment implements
                 Toast.makeText(getActivity(), "Please provide your full name.", Toast.LENGTH_SHORT).show();
             } else if (TextUtils.isEmpty(phone_number.getText().toString())) {
                 Toast.makeText(getActivity(), "Please provide your phone number.", Toast.LENGTH_SHORT).show();
-            } else if (TextUtils.isEmpty(address.getText().toString())||address.getText().toString().trim().matches(emailPattern)) {
+            } else if (TextUtils.isEmpty(address.getText().toString())|| !address.getText().toString().trim().matches(emailPattern)) {
                 Toast.makeText(getActivity(), "Please provide a valid email address.", Toast.LENGTH_SHORT).show();
             } else if (TextUtils.isEmpty(number_of_poeple.getText().toString())) {
                 Toast.makeText(getActivity(), "Please provide number of people.", Toast.LENGTH_SHORT).show();
