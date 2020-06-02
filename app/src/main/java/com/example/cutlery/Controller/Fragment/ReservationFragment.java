@@ -5,6 +5,8 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -28,6 +31,8 @@ public class ReservationFragment extends Fragment implements
     private int mYear, mMonth, mDay, mHour, mMinute;
     private EditText name, phone_number, address, number_of_poeple;
     private Button confirmBtn;
+    FrameLayout mainframLayout;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     public ReservationFragment() {
         // Required empty public constructor
@@ -59,6 +64,7 @@ public class ReservationFragment extends Fragment implements
         phone_number=view.findViewById(R.id.phone_number);
         address=view.findViewById(R.id.address);
         confirmBtn=view.findViewById(R.id.confirmBtn);
+        mainframLayout=view.findViewById(R.id.mainframLayout);
 
 
 
@@ -117,33 +123,47 @@ public class ReservationFragment extends Fragment implements
             timePickerDialog.show();
         }
         if (v == confirmBtn) {
-            Check();
+            if(Check()) {
+
+                Fragment fragment = new ConfirmationFragment();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(mainframLayout.getId(), fragment);
+                Bundle args = new Bundle();
+//// Pass the values to next fragment
+//            args.putInt("Year", rYear);
+//            args.putString("Month", rMonth);
+//            args.putInt("Industry", rIndustry);
+//            fragment.setArguments(args);
+                fragmentTransaction.commit();
+
+            }
         }
 
     }
 
 
-    private void Check()
+    private boolean Check()
     {
-        if (TextUtils.isEmpty(name.getText().toString()))
-        {
-            Toast.makeText(getActivity(), "Please provide your full name.", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(phone_number.getText().toString()))
-        {
-            Toast.makeText(getActivity(), "Please provide your phone number.", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(address.getText().toString()))
-        {
-            Toast.makeText(getActivity(), "Please provide your email address.", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(number_of_poeple.getText().toString()))
-        {
-            Toast.makeText(getActivity(), "Please provide number of people.", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            //ConfirmOrder();
-        }
+        boolean result=false;
+
+            if (TextUtils.isEmpty(name.getText().toString())) {
+                Toast.makeText(getActivity(), "Please provide your full name.", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(phone_number.getText().toString())) {
+                Toast.makeText(getActivity(), "Please provide your phone number.", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(address.getText().toString())||address.getText().toString().trim().matches(emailPattern)) {
+                Toast.makeText(getActivity(), "Please provide a valid email address.", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(number_of_poeple.getText().toString())) {
+                Toast.makeText(getActivity(), "Please provide number of people.", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(txtDate.getText().toString())) {
+                Toast.makeText(getActivity(), "Please provide the date.", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(txtTime.getText().toString())) {
+                Toast.makeText(getActivity(), "Please provide the time.", Toast.LENGTH_SHORT).show();
+            } else {
+                result= true;
+            }
+
+
+
+        return result;
     }
 }

@@ -1,11 +1,13 @@
 package com.example.cutlery.Controller.Fragment;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cutlery.Controller.Adapter.CartViewHolder;
+import com.example.cutlery.Controller.BreakfastActivity;
+import com.example.cutlery.Controller.CartActivity;
 import com.example.cutlery.Controller.LoginActivity;
 import com.example.cutlery.Controller.MainActivity;
 import com.example.cutlery.Controller.MenuDetailActivity;
@@ -38,6 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import Model.CartModel;
 
@@ -50,7 +55,8 @@ public class CartFragment extends Fragment {
     private TextView totalAmount;
     private Button reservation;
     final FirebaseAuth auth = FirebaseAuth.getInstance();
-
+    Intent intent;
+    private int overTotalPrice = 0;
 
 
     public CartFragment() {
@@ -71,21 +77,16 @@ public class CartFragment extends Fragment {
         // Inflate the layout for this fragment
         View root= inflater.inflate(R.layout.fragment_cart, container, false);
 
+
         recyclerView_cart = root.findViewById(R.id.recyclerview_cart);
         recyclerView_cart.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         recyclerView_cart.setLayoutManager(linearLayoutManager);
 
       //find reservation view
+        totalAmount=root.findViewById(R.id.menu_total);
 
-       /* reservation=root.findViewById(R.id.reservation);
-        reservation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ReservationActivity.class));
-            }
-        });
-*/
+
         //get current user uid
 
         final FirebaseUser user =  auth.getCurrentUser();
@@ -106,11 +107,16 @@ public class CartFragment extends Fragment {
                 holder.textView_price.setText(String.valueOf(model.getPrice()));
                 holder.textView_quantity.setText(model.getQuantity());
 
+                //calculate price
+                int oneTyprProductTPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
+                overTotalPrice = overTotalPrice + oneTyprProductTPrice;
+
+                //set totalamount
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view)
                     {
-                        CharSequence options[] = new CharSequence[]
+                        CharSequence[] options = new CharSequence[]
                                 {
                                         "Remove"
                                 };
@@ -131,7 +137,10 @@ public class CartFragment extends Fragment {
                                                     if (task.isSuccessful())
                                                     {
                                                         Toast.makeText(getActivity(), "Item removed successfully.", Toast.LENGTH_SHORT).show();
-
+                                                        intent = new Intent(getActivity(), CartActivity.class);
+                                                        getActivity().startActivity(intent);
+                                                        ((Activity) getActivity()).overridePendingTransition(0, 0);
+                                                        getActivity().finish();
                                                     }
                                                 }
 
@@ -143,6 +152,8 @@ public class CartFragment extends Fragment {
                         builder.show();
                     }
                 });
+                totalAmount.setText("Total = "+ overTotalPrice);
+
             }
 
             @NonNull
@@ -157,7 +168,22 @@ public class CartFragment extends Fragment {
         recyclerView_cart.setAdapter(adapter);
         adapter.startListening();
 
+
+
+        reservation=root.findViewById(R.id.btn_reservation);
+        reservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getActivity(),ReservationActivity.class);
+                intent.putExtra("Hello","Nisar");
+                getActivity().startActivity(intent);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+
         return root;
     }
+
+
 }
 

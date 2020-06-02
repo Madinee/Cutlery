@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 //        FloatingActionButton fab = findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -106,18 +107,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = menuItem.getItemId();
         if (id == R.id.nav_home_menu) {
             setFragment(new HomeFragment());
-            getSupportActionBar().setTitle("Menu");
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         else if(id==R.id.nav_cart){
             setFragment(new CartFragment());
-            getSupportActionBar().setTitle("Cart");
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            setTitle("Cart");
         }
         else if(id==R.id.nav_reservation){
             setFragment(new ReservationFragment());
-            getSupportActionBar().setTitle("Reservation");
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         else if(id==R.id.nav_gallery){
         }
@@ -136,12 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
- /*   @Override
-  public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                ||                       super.onSupportNavigateUp();
-    }*/
+
 
 
     private void setFragment(Fragment fragment){
