@@ -33,6 +33,9 @@ public class ReservationFragment extends Fragment implements
     private Button confirmBtn;
     FrameLayout mainframLayout;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    String namePattern="[a-zA-Z ]+";
+    String phonePattern = "^([0-9\\+]|\\(\\d{1,3}\\))[0-9\\-\\. ]{3,15}$";
+    String datePattern="(0?[1-9]|1[012]) [/.-] (0?[1-9]|[12][0-9]|3[01]) [/.-] ((19|20)\\d\\d)";
 
     public ReservationFragment() {
         // Required empty public constructor
@@ -96,7 +99,7 @@ public class ReservationFragment extends Fragment implements
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
 
-                            txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            txtDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
 
                         }
                     }, mYear, mMonth, mDay);
@@ -146,15 +149,15 @@ public class ReservationFragment extends Fragment implements
     {
         boolean result=false;
 
-            if (TextUtils.isEmpty(name.getText().toString())) {
-                Toast.makeText(getActivity(), "Please provide your full name.", Toast.LENGTH_SHORT).show();
-            } else if (TextUtils.isEmpty(phone_number.getText().toString())) {
+            if (TextUtils.isEmpty(name.getText().toString())|| !name.getText().toString().trim().matches(namePattern) ) {
+                Toast.makeText(getActivity(), "Please provide a valid ful name.", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(phone_number.getText().toString()) || !phone_number.getText().toString().trim().matches(phonePattern)) {
                 Toast.makeText(getActivity(), "Please provide your phone number.", Toast.LENGTH_SHORT).show();
             } else if (TextUtils.isEmpty(address.getText().toString())|| !address.getText().toString().trim().matches(emailPattern)) {
                 Toast.makeText(getActivity(), "Please provide a valid email address.", Toast.LENGTH_SHORT).show();
-            } else if (TextUtils.isEmpty(number_of_poeple.getText().toString())) {
+            } else if (TextUtils.isEmpty(number_of_poeple.getText().toString()) || Integer.parseInt(number_of_poeple.getText().toString()) < 1 || Integer.parseInt(number_of_poeple.getText().toString()) > 50)  {
                 Toast.makeText(getActivity(), "Please provide number of people.", Toast.LENGTH_SHORT).show();
-            } else if (TextUtils.isEmpty(txtDate.getText().toString())) {
+            } else if (TextUtils.isEmpty(txtDate.getText().toString()) || !txtDate.getText().toString().trim().matches(datePattern)) {
                 Toast.makeText(getActivity(), "Please provide the date.", Toast.LENGTH_SHORT).show();
             } else if (TextUtils.isEmpty(txtTime.getText().toString())) {
                 Toast.makeText(getActivity(), "Please provide the time.", Toast.LENGTH_SHORT).show();
