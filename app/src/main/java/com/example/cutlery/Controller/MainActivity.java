@@ -2,17 +2,11 @@ package com.example.cutlery.Controller;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
-import com.example.cutlery.Controller.Fragment.BreakfastFragment;
 import com.example.cutlery.Controller.Fragment.CartFragment;
 import com.example.cutlery.Controller.Fragment.HomeFragment;
-import com.example.cutlery.Controller.Fragment.ReservationFragment;
 import com.example.cutlery.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -113,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setTitle("Cart");
         }
         else if(id==R.id.nav_reservation){
-            setFragment(new ReservationFragment());
         }
         else if(id==R.id.nav_gallery){
         }

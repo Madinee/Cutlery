@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_myevent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         >
         <RelativeLayout
             android:id="@+id/linear"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:orientation="horizontal"
             android:layout_marginEnd="3dp"
+            android:background="@color/colorBacgroundNavHeader"
 
             >
 
             <TextView
-                android:id="@+id/menu_name"
+                android:id="@+id/menu_name_c"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:text="Name"
@@ -32,10 +33,10 @@
 
                 />
             <TextView
-                android:id="@+id/menu_quantity"
+                android:id="@+id/menu_quantity_c"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="180dp"
+                android:layout_marginStart="190dp"
                 android:text="qty"
                 android:layout_marginTop="12dp"
                 android:textAlignment="center"
@@ -43,25 +44,17 @@
                 />
 
             <TextView
-                android:id="@+id/menu_price"
+                android:id="@+id/menu_price_c"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="270dp"
+                android:layout_marginStart="280dp"
                 android:text="Price"
                 android:layout_marginTop="12dp"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 />
 
-            <ImageView
-                android:textAlignment="center"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="12dp"
-                android:clickable="false"
-               android:layout_alignParentEnd="true"
-                android:src="@android:drawable/ic_delete"
-                />
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

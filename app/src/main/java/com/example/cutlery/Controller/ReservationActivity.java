@@ -5,12 +5,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.cutlery.Controller.Fragment.CartFragment;
-import com.example.cutlery.Controller.Fragment.ConfirmationFragment;
 import com.example.cutlery.Controller.Fragment.ReservationFragment;
 import com.example.cutlery.R;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 

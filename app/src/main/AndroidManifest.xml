@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:theme">
-        <activity android:name=".Controller.ReservationActivity"></activity>
+        <activity android:name=".Controller.ConfirmActivity"></activity>
+        <activity android:name=".Controller.ReservationActivity" />
         <activity android:name=".Controller.CartActivity" />
         <activity android:name=".Controller.MenuDetailActivity" />
         <activity android:name=".Controller.BreakfastActivity" />

@@ -2,6 +2,7 @@ package com.example.cutlery.Controller.Fragment;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,8 @@ import android.widget.FrameLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.cutlery.Controller.ConfirmActivity;
+import com.example.cutlery.Controller.ReservationActivity;
 import com.example.cutlery.R;
 
 import java.util.Calendar;
@@ -32,10 +35,13 @@ public class ReservationFragment extends Fragment implements
     private EditText name, phone_number, address, number_of_poeple;
     private Button confirmBtn;
     FrameLayout mainframLayout;
+    Intent intent;
+
+    String name_v, phone_number_v, address_v, numberpeople_v, date_v, time_v;
+
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     String namePattern="[a-zA-Z ]+";
     String phonePattern = "^([0-9\\+]|\\(\\d{1,3}\\))[0-9\\-\\. ]{3,15}$";
-    String datePattern="(0?[1-9]|1[012]) [/.-] (0?[1-9]|[12][0-9]|3[01]) [/.-] ((19|20)\\d\\d)";
 
     public ReservationFragment() {
         // Required empty public constructor
@@ -69,6 +75,9 @@ public class ReservationFragment extends Fragment implements
         confirmBtn=view.findViewById(R.id.confirmBtn);
         mainframLayout=view.findViewById(R.id.mainframLayout);
 
+        //text
+
+
 
 
         btnDatePicker.setOnClickListener(this);
@@ -99,7 +108,7 @@ public class ReservationFragment extends Fragment implements
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
 
-                            txtDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
                         }
                     }, mYear, mMonth, mDay);
@@ -128,16 +137,24 @@ public class ReservationFragment extends Fragment implements
         if (v == confirmBtn) {
             if(Check()) {
 
-                Fragment fragment = new ConfirmationFragment();
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(mainframLayout.getId(), fragment);
-                Bundle args = new Bundle();
-//// Pass the values to next fragment
-//            args.putInt("Year", rYear);
-//            args.putString("Month", rMonth);
-//            args.putInt("Industry", rIndustry);
-//            fragment.setArguments(args);
-                fragmentTransaction.commit();
+                name_v=name.getText().toString();
+                phone_number_v=phone_number.getText().toString();
+                address_v=address.getText().toString();
+                date_v=txtDate.getText().toString();
+                time_v=txtTime.getText().toString();
+                numberpeople_v=number_of_poeple.getText().toString();
+
+                System.out.println("nomde"+name);
+
+                intent = new Intent(getActivity(), ConfirmActivity.class);
+                intent.putExtra("name", name_v);
+                intent.putExtra("email", address_v);
+                intent.putExtra("date", date_v);
+                intent.putExtra("time", time_v);
+                intent.putExtra("numberPeople", numberpeople_v);
+                intent.putExtra("phone", phone_number_v);
+                getActivity().startActivity(intent);
+
 
             }
         }
@@ -152,15 +169,15 @@ public class ReservationFragment extends Fragment implements
             if (TextUtils.isEmpty(name.getText().toString())|| !name.getText().toString().trim().matches(namePattern) ) {
                 Toast.makeText(getActivity(), "Please provide a valid ful name.", Toast.LENGTH_SHORT).show();
             } else if (TextUtils.isEmpty(phone_number.getText().toString()) || !phone_number.getText().toString().trim().matches(phonePattern)) {
-                Toast.makeText(getActivity(), "Please provide your phone number.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Please provide a valid phone number.", Toast.LENGTH_SHORT).show();
             } else if (TextUtils.isEmpty(address.getText().toString())|| !address.getText().toString().trim().matches(emailPattern)) {
                 Toast.makeText(getActivity(), "Please provide a valid email address.", Toast.LENGTH_SHORT).show();
             } else if (TextUtils.isEmpty(number_of_poeple.getText().toString()) || Integer.parseInt(number_of_poeple.getText().toString()) < 1 || Integer.parseInt(number_of_poeple.getText().toString()) > 50)  {
-                Toast.makeText(getActivity(), "Please provide number of people.", Toast.LENGTH_SHORT).show();
-            } else if (TextUtils.isEmpty(txtDate.getText().toString()) || !txtDate.getText().toString().trim().matches(datePattern)) {
-                Toast.makeText(getActivity(), "Please provide the date.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Please provide a valid number of people.", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(txtDate.getText().toString())) {
+                Toast.makeText(getActivity(), "Please provide a valid date.", Toast.LENGTH_SHORT).show();
             } else if (TextUtils.isEmpty(txtTime.getText().toString())) {
-                Toast.makeText(getActivity(), "Please provide the time.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Please provide a valid time.", Toast.LENGTH_SHORT).show();
             } else {
                 result= true;
             }

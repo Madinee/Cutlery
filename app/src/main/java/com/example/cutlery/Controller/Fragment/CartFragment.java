@@ -175,7 +175,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 intent = new Intent(getActivity(),ReservationActivity.class);
-                intent.putExtra("Hello","Nisar");
+                //intent.putExtra("Hello","Nisar");
                 getActivity().startActivity(intent);
                 ((Activity) getActivity()).overridePendingTransition(0, 0);
             }
