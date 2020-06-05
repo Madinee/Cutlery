@@ -152,13 +152,12 @@ public class CartFragment extends Fragment {
                         builder.show();
                     }
                 });
-                totalAmount.setText("Total = "+ overTotalPrice);
+                totalAmount.setText("Total = "+ overTotalPrice+ "€");
 
             }
 
             @NonNull
             @Override
-
             public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item, parent, false);
                 CartViewHolder holder = new CartViewHolder(view);

@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import Model.CartModel;
 
 public class ConfirmActivity extends AppCompatActivity {
+
     private  String name_v, phone_number_v, address_v, numberpeople_v, date_v, time_v;
     final FirebaseAuth auth = FirebaseAuth.getInstance();
     private RecyclerView recyclerView_cart;
@@ -77,6 +78,11 @@ public class ConfirmActivity extends AppCompatActivity {
         recyclerView_cart.setLayoutManager(linearLayoutManager);
 
 
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         //get current user uid
 
         final FirebaseUser user =  auth.getCurrentUser();
@@ -84,6 +90,7 @@ public class ConfirmActivity extends AppCompatActivity {
 
         //firebase data
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference();
+
 
         FirebaseRecyclerOptions<CartModel> options =new FirebaseRecyclerOptions.Builder<CartModel>()
                 .setQuery(cartListRef.child("CART")
@@ -101,7 +108,6 @@ public class ConfirmActivity extends AppCompatActivity {
 
             @NonNull
             @Override
-
             public ConfirmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.confirm_item, parent, false);
                 ConfirmViewHolder holder = new ConfirmViewHolder(view);
@@ -110,6 +116,7 @@ public class ConfirmActivity extends AppCompatActivity {
         };
         recyclerView_cart.setAdapter(adapter);
         adapter.startListening();
+
 
 
 

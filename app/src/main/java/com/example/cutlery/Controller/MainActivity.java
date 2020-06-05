@@ -1,5 +1,6 @@
 package com.example.cutlery.Controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -7,8 +8,12 @@ import android.widget.FrameLayout;
 import com.example.cutlery.Controller.Fragment.CartFragment;
 import com.example.cutlery.Controller.Fragment.HomeFragment;
 import com.example.cutlery.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
@@ -23,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AppBarConfiguration mAppBarConfiguration;
      FrameLayout mainframLayout;
      private String title;
-
+    private FirebaseAuth mAuth;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,32 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.search) {
-//            return true;
-//        }
-//        else if(id==R.id.filter){
-//            return true;
-//        }
-//        else if(id==R.id.cart){
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -106,8 +86,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setFragment(new CartFragment());
             setTitle("Cart");
         }
-        else if(id==R.id.nav_reservation){
-        }
         else if(id==R.id.nav_gallery){
         }
         else if(id==R.id.nav_location){
@@ -117,6 +95,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if(id==R.id.nav_about){
         }
         else if(id==R.id.nav_sign_out){
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer=(DrawerLayout)findViewById(R.id.drawer_layout);

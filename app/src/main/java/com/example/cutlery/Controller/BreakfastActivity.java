@@ -89,6 +89,8 @@ public class BreakfastActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.search) {
+            Intent intent = new Intent(BreakfastActivity.this, SearchActivity.class);
+            startActivity(intent);
             return true;
         }
         else if(id==R.id.filter){
