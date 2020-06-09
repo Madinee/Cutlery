@@ -3,6 +3,7 @@ package com.example.cutlery.Controller.Fragment;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +23,12 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.cutlery.Controller.ConfirmActivity;
+import com.example.cutlery.Controller.JavaMailAPI;
 import com.example.cutlery.Controller.ReservationActivity;
 import com.example.cutlery.R;
 
 import java.util.Calendar;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class ReservationFragment extends Fragment implements
@@ -139,13 +143,14 @@ public class ReservationFragment extends Fragment implements
 
                 name_v=name.getText().toString();
                 phone_number_v=phone_number.getText().toString();
-                address_v=address.getText().toString();
+                address_v=address.getText().toString().trim();
                 date_v=txtDate.getText().toString();
                 time_v=txtTime.getText().toString();
                 numberpeople_v=number_of_poeple.getText().toString();
 
                 System.out.println("nomde"+name);
 
+                sendEmail();
                 intent = new Intent(getActivity(), ConfirmActivity.class);
                 intent.putExtra("name", name_v);
                 intent.putExtra("email", address_v);
@@ -185,5 +190,12 @@ public class ReservationFragment extends Fragment implements
 
 
         return result;
+    }
+
+    protected void sendEmail() {
+        int randomNum = ThreadLocalRandom.current().nextInt(1, 1000 + 1);
+        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(),address_v,"Confirmation", "Hello "+ name_v+ ", \n"+" Your table has been booked. Thank you for your trust in our restaurant." +
+                "\n Your book number is "+randomNum);
+        javaMailAPI.execute();
     }
 }

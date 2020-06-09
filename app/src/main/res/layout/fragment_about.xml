@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    tools:context=".Controller.Fragment.AboutFragment">
+
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingTop="20dp"
+            android:layout_marginStart="10dp"
+            android:drawableStart="@drawable/ic_baseline_home_24"
+            android:text="Horizontal scroll view will work now"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorBacgroundNavHeader"/>
+
+
+</LinearLayout>

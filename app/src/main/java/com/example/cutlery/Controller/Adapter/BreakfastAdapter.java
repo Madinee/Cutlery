@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,15 +16,18 @@ import com.example.cutlery.Controller.MenuDetailActivity;
 import com.example.cutlery.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.MenuModel;
 
-public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.ViewHolder> {
+public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.ViewHolder> implements Filterable {
     private List<MenuModel> list;
+    private List<MenuModel> listFull;
 
     public BreakfastAdapter(List<MenuModel> list) {
         this.list = list;
+        listFull = new ArrayList<>(list);
     }
 
     @NonNull
@@ -45,6 +50,40 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
         return list.size();
 
     }
+
+    @Override
+    public Filter getFilter() {
+        return listFilter;
+    }
+
+    private Filter listFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<MenuModel> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(listFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (MenuModel item : listFull) {
+                    if (item.getName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+                listFull=filteredList;
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            list.clear();
+            list.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;
