@@ -95,7 +95,7 @@ public class ConfirmActivity extends AppCompatActivity {
         FirebaseRecyclerOptions<CartModel> options =new FirebaseRecyclerOptions.Builder<CartModel>()
                 .setQuery(cartListRef.child("CART")
                         .child(uid), CartModel.class)
-                .build();
+                        .build();
         FirebaseRecyclerAdapter<CartModel, ConfirmViewHolder> adapter
                 =new FirebaseRecyclerAdapter<CartModel, ConfirmViewHolder>(options) {
             @Override

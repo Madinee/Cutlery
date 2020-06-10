@@ -108,7 +108,7 @@ public class CartFragment extends Fragment {
                 holder.textView_quantity.setText(model.getQuantity());
 
                 //calculate price
-                int oneTyprProductTPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
+                int oneTyprProductTPrice = ((model.getPrice())) * Integer.parseInt(model.getQuantity());
                 overTotalPrice = overTotalPrice + oneTyprProductTPrice;
 
                 //set totalamount
