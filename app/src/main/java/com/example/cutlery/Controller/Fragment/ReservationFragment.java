@@ -194,15 +194,15 @@ public class ReservationFragment extends Fragment implements
 
     protected void sendEmail() {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 1000 + 1);
-        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(),address_v,"Confirmation", "Hello \n "+ name_v+ ", \n"+"Your table has been booked. Thank you for your trust in our restaurant." +
-                "\n Your table book number is "+randomNum+"\n \n"+"Booking information " +
-                "\n Name: "+name_v+
+        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(),address_v,"Confirmation", "Hello "+ name_v+ ", \n"+"Your table has been booked. Thank you for your trust in our restaurant." +
+                "\nYour booking number is "+randomNum+"\n\n\n"+"Booking information " +
+                "\n \n Name: "+name_v+
                 "\n Phone number: "+phone_number_v+
                 "\n Number of people: "+numberpeople_v+
                 "\n Date: "+date_v+
                 "\n Time: "+time_v+
-                "\n \n You can cancel your booking by sending us an email or calling 24 hours before the booking date "+
-                "\n \n \n Cutlery");
+                "\n \nYou can cancel your booking by sending us an email or calling 24 hours before the booking date "+
+                "\n \n \nCutlery");
         javaMailAPI.execute();
     }
 }

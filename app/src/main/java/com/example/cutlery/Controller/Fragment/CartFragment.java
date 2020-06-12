@@ -26,6 +26,7 @@ import com.example.cutlery.Controller.CartActivity;
 import com.example.cutlery.Controller.LoginActivity;
 import com.example.cutlery.Controller.MainActivity;
 import com.example.cutlery.Controller.MenuDetailActivity;
+import com.example.cutlery.Controller.MyDatabaseUtil;
 import com.example.cutlery.Controller.ReservationActivity;
 import com.example.cutlery.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -93,7 +94,7 @@ public class CartFragment extends Fragment {
         final String uid = user.getUid();
 
         //firebase data
-        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference cartListRef = MyDatabaseUtil.getDatabase().getReference();
 
         FirebaseRecyclerOptions<CartModel> options =new FirebaseRecyclerOptions.Builder<CartModel>()
                 .setQuery(cartListRef.child("CART")

@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
 
 import Model.CartModel;
 
@@ -78,24 +79,18 @@ public class ConfirmActivity extends AppCompatActivity {
         recyclerView_cart.setLayoutManager(linearLayoutManager);
 
 
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-
         //get current user uid
 
         final FirebaseUser user =  auth.getCurrentUser();
         final String uid = user.getUid();
 
         //firebase data
-        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference();
-
+        final DatabaseReference cartListRef = MyDatabaseUtil.getDatabase().getReference();
 
         FirebaseRecyclerOptions<CartModel> options =new FirebaseRecyclerOptions.Builder<CartModel>()
                 .setQuery(cartListRef.child("CART")
                         .child(uid), CartModel.class)
-                        .build();
+                .build();
         FirebaseRecyclerAdapter<CartModel, ConfirmViewHolder> adapter
                 =new FirebaseRecyclerAdapter<CartModel, ConfirmViewHolder>(options) {
             @Override
@@ -117,6 +112,12 @@ public class ConfirmActivity extends AppCompatActivity {
         recyclerView_cart.setAdapter(adapter);
         adapter.startListening();
 
+
+
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
 
 
 
