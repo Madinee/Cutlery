@@ -8,12 +8,12 @@
         android:icon="@drawable/ic_search"
         app:showAsAction="always"
         android:title="@string/search" />
-    <item
-        android:id="@+id/filter"
-        android:orderInCategory="100"
-        android:icon="@drawable/ic_filter_list"
-        app:showAsAction="always"
-        android:title="@string/filter" />
+<!--    <item-->
+<!--        android:id="@+id/filter"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:icon="@drawable/ic_filter_list"-->
+<!--        app:showAsAction="always"-->
+<!--        android:title="@string/filter" />-->
     <item
         android:id="@+id/cart"
         android:orderInCategory="100"
