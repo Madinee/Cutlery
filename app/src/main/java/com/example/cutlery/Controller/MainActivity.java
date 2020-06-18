@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import com.example.cutlery.Controller.Fragment.AboutFragment;
 import com.example.cutlery.Controller.Fragment.CartFragment;
 import com.example.cutlery.Controller.Fragment.HomeFragment;
 import com.example.cutlery.R;
@@ -23,11 +25,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
      FrameLayout mainframLayout;
-     private String title;
     private FirebaseAuth mAuth;
     @Override
 
@@ -39,14 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -86,13 +80,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setFragment(new CartFragment());
             setTitle("Cart");
         }
-        else if(id==R.id.nav_gallery){
-        }
-        else if(id==R.id.nav_location){
-        }
         else if(id==R.id.nav_account){
         }
         else if(id==R.id.nav_about){
+            setFragment(new AboutFragment());
+            setTitle("About");
         }
         else if(id==R.id.nav_sign_out){
             FirebaseAuth.getInstance().signOut();
@@ -108,12 +100,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-
-
     private void setFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(mainframLayout.getId(),fragment);
         fragmentTransaction.commit();
     }
+
+
 
 }

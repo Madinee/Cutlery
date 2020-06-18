@@ -93,9 +93,7 @@ public class BreakfastActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
-        else if(id==R.id.filter){
-            return true;
-        }
+
         else if(id==R.id.cart){
             Intent intent = new Intent(BreakfastActivity.this, CartActivity.class);
             startActivity(intent);
