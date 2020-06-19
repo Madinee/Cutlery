@@ -159,8 +159,6 @@ public class ReservationFragment extends Fragment implements
                 intent.putExtra("numberPeople", numberpeople_v);
                 intent.putExtra("phone", phone_number_v);
                 getActivity().startActivity(intent);
-
-
             }
         }
 
