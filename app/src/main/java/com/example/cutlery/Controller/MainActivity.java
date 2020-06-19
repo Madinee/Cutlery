@@ -29,15 +29,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private AppBarConfiguration mAppBarConfiguration;
      FrameLayout mainframLayout;
+    Toolbar toolbar;
     private FirebaseAuth mAuth;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mainframLayout=findViewById(R.id.mainframLayout);
        setFragment(new HomeFragment());
+        getSupportActionBar().setTitle("Menu");
+
 
 
     }
@@ -75,16 +77,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = menuItem.getItemId();
         if (id == R.id.nav_home_menu) {
             setFragment(new HomeFragment());
+            getSupportActionBar().setTitle("Menu");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         else if(id==R.id.nav_cart){
             setFragment(new CartFragment());
-            setTitle("Cart");
+            getSupportActionBar().setTitle("Cart");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         }
         else if(id==R.id.nav_account){
         }
         else if(id==R.id.nav_about){
             setFragment(new AboutFragment());
-            setTitle("About");
+            getSupportActionBar().setTitle("About");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         }
         else if(id==R.id.nav_sign_out){
             FirebaseAuth.getInstance().signOut();
