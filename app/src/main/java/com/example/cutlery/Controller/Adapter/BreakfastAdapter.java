@@ -21,7 +21,7 @@ import java.util.List;
 
 import Model.MenuModel;
 
-public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.ViewHolder> implements Filterable {
+public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.ViewHolder> {
     private List<MenuModel> list;
     private List<MenuModel> listFull;
 
@@ -50,40 +50,6 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
         return list.size();
 
     }
-
-    @Override
-    public Filter getFilter() {
-        return listFilter;
-    }
-
-    private Filter listFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<MenuModel> filteredList = new ArrayList<>();
-            if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(listFull);
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for (MenuModel item : listFull) {
-                    if (item.getName().toLowerCase().contains(filterPattern)) {
-                        filteredList.add(item);
-                    }
-                }
-                listFull=filteredList;
-            }
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-
-            list.clear();
-            list.addAll((List) results.values);
-            notifyDataSetChanged();
-        }
-    };
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;

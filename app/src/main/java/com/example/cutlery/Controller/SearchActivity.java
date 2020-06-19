@@ -85,63 +85,34 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                searchMenu(query);
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                searchMenu(newText);
                 return false;
             }
         });
 
-        //search
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(final String query) {
-//                searchList.clear();
-//                final String[] name =query.toLowerCase().split(" ");
-//                for(final String namee:name){
-//                    firebaseFirestore.getInstance().collection("MENU").whereEqualTo("name", namee)
-//                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                            if(task.isSuccessful()){
-//                                for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
-//                                    searchList.add(
-//                                            new MenuModel(documentSnapshot.get("image").toString()
-//                                                    , documentSnapshot.get("name").toString()
-//                                                    , ((Long)documentSnapshot.get("price")).intValue()));
-//
-//                                }
-//                                if(namee.equals(name[name.length-1])){
-//                                    if(searchList.size()==0){
-//                                        Toast.makeText(SearchActivity.this, "not found", Toast.LENGTH_SHORT).show();
-//                                        recyclerView_search.setVisibility(View.GONE);
-//                                    }else{
-//                                        recyclerView_search.setVisibility(View.VISIBLE);
-//                                        adapter.getFilter().filter(query);
-//
-//                                    }
-//                                }
-//
-//                            }else{
-//                                String error=task.getException().getMessage();
-//                                Toast.makeText(SearchActivity.this, "error", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
-//
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                return false;
-//            }
-//        });
+
+
     }
 
+    private void searchMenu(String recherche) {
+        if (recherche.length() > 0)
+            recherche = recherche.substring(0, 1).toUpperCase() + recherche.substring(1).toLowerCase();
+
+        ArrayList<MenuModel> results = new ArrayList<>();
+        for(MenuModel model : searchList){
+            if(model.getName() != null && model.getName().contains(recherche)){
+                results.add(model);
+            }
+            adapter =  new BreakfastAdapter(results);
+            recyclerView_search.setAdapter(adapter);
+        }
+
+    }
 
     @Override
     public boolean onSupportNavigateUp() {

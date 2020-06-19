@@ -24,19 +24,8 @@ import com.example.cutlery.R;
 
 
         }
-       /*public void setMenu(final String name, int price, String quantity) {
-            textView_name.setText(name);
-            textView_price.setText(String.valueOf(price)+"€");
-            textView_quantity.setText(quantity);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-        }*/
        public void setItemClickListner(ItemClickListner itemClickListner)
        {
            this.itemClickListner = itemClickListner;
