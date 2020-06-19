@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="@color/colorBacgroundNavHeader"
+            android:background="@color/primaryLight"
             >
             <TextView
                 android:id="@+id/menu_name"
@@ -101,7 +101,7 @@
         </RelativeLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_cart_c"
-            android:background="@color/colorBacgroundNavHeader"
+            android:background="@color/primaryLight"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="25dp"
-            android:background="@color/colorBacgroundNavHeader">
+            android:background="@color/primaryLight">
 
             <TextView
                 android:id="@+id/name"

@@ -5,5 +5,6 @@
     <color name="colorAccent">#FF8BBB</color>
     <color name="colorBacgroundNavHeader">#FFD0E4</color>
     <color name="colorBlackLight">#777474</color>
+    <color name="primaryLight">#FBEFF8</color>
 
 </resources>

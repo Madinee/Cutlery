@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.cutlery.Controller.Fragment.AboutFragment;
 import com.example.cutlery.Controller.Fragment.CartFragment;
 import com.example.cutlery.Controller.Fragment.HomeFragment;
+import com.example.cutlery.Controller.Fragment.MyAccountFragment;
 import com.example.cutlery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -87,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
         else if(id==R.id.nav_account){
+            setFragment(new MyAccountFragment());
+            getSupportActionBar().setTitle("My Account");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         else if(id==R.id.nav_about){
             setFragment(new AboutFragment());
