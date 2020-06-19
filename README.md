@@ -6,18 +6,20 @@
  (for this case I choose to call this restaurant Cutlery)
 
 ## ScreenShots - Native App
-![alt text](https://github.com/Madinee/Cutlery/blob/master/screenshots/1.jpeg "Register screen")
+<img src="https://github.com/Madinee/Cutlery/blob/master/screenshots/1.jpeg" width="300" title="Register screen">
 
-![alt text](https://github.com/Madinee/Cutlery/blob/master/screenshots/2.jpeg "login screen")
+<img src="https://github.com/Madinee/Cutlery/blob/master/screenshots/2.jpeg" width="300" title="login screen">
 
-![alt text](https://github.com/Madinee/Cutlery/blob/master/screenshots/3.jpeg "home screen")
+<img src="https://github.com/Madinee/Cutlery/blob/master/screenshots/3.jpeg" width="300" title="home screen">
 
-![alt text](https://github.com/Madinee/Cutlery/blob/master/screenshots/4.jpeg)
+<img src="https://github.com/Madinee/Cutlery/blob/master/screenshots/4.jpeg" width="300" >
 
-![alt text](https://github.com/Madinee/Cutlery/blob/master/screenshots/5.jpeg "Appetizers screen)
+<img src="https://github.com/Madinee/Cutlery/blob/master/screenshots/5.jpeg" width="300" title="Appetizers screen">
 
-![alt text](https://github.com/Madinee/Cutlery/blob/master/screenshots/6.jpeg "cart screen)
+<img src="https://github.com/Madinee/Cutlery/blob/master/screenshots/6.jpeg" width="300" title="cart screen">
 
-![alt text](https://github.com/Madinee/Cutlery/blob/master/screenshots/7.jpeg)
+<img src="https://github.com/Madinee/Cutlery/blob/master/screenshots/7.jpeg" width="300" >
 
-![alt text](https://github.com/Madinee/Cutlery/blob/master/screenshots/8.jpeg)
+<img src="https://github.com/Madinee/Cutlery/blob/master/screenshots/8.jpeg" width="300" >
+
+
