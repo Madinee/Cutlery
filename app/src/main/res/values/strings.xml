@@ -37,4 +37,7 @@
     <string name="copyright">Copyright</string>
     <string name="copyright_2020">Copyright 2020</string>
     <string name="share_to_your_friends">Share to your friends</string>
+    <string name="number_of_people">Number of people</string>
+    <string name="your_email_address">Your Email Address</string>
+    <string name="your_phone_number">Your Phone Number</string>
 </resources>
