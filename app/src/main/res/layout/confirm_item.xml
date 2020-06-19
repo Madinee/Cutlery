@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:background="@color/colorBacgroundNavHeader"
+            android:background="@color/primaryLight"
 
             >
 

@@ -107,12 +107,21 @@
             >
         </androidx.recyclerview.widget.RecyclerView>
 
+        <TextView
+            android:id="@+id/information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booking information"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:textColor="@android:color/black"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="25dp"
             android:background="@color/primaryLight">
+
 
             <TextView
                 android:id="@+id/name"
